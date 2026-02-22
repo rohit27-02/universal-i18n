@@ -19,7 +19,7 @@
         "automatic-translation",
         "language-switcher"
     ],
-    "author": "Lingo.dev",
+    "author": "Rohit Rawat",
     "repository": {
         "type": "git",
         "url": "https://github.com/lingo-i18n/universal-i18n"
