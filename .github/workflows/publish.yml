@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      id-token: write # Required for OIDC Trusted Publishing
 
     steps:
       - name: Checkout
@@ -22,15 +22,13 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Install dependencies (workspace root)
+      - name: Install dependencies
         run: npm install
 
       - name: Build package
         run: npm run build
         working-directory: packages/react
 
-      - name: Publish to NPM
-        run: npm publish --access public
+      - name: Publish to NPM (Trusted Publishing)
+        run: npm publish --access public --provenance
         working-directory: packages/react
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
