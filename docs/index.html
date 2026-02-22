@@ -634,7 +634,7 @@
     <div class="hero">
       <div class="badge">
         <div class="badge-dot"></div>
-        @universal-i18n/react v3.0.4 — Now on NPM
+        @universal-i18n/react v3.0.5 — Now on NPM
       </div>
 
       <h1>
@@ -783,6 +783,14 @@
   <div class="pre-dot red"></div>
   <div class="pre-dot yellow"></div>
   <div class="pre-dot green"></div>
+  <span class="pre-filename">.env.local</span>
+</div><span class="kw">LINGODOTDEV_API_KEY</span>=<span class="str">"your_api_key_here"</span></pre>
+          <br />
+          <pre>
+<div class="pre-header">
+  <div class="pre-dot red"></div>
+  <div class="pre-dot yellow"></div>
+  <div class="pre-dot green"></div>
   <span class="pre-filename">app/api/universal-i18n/route.ts</span>
 </div><span class="kw">import</span> { <span class="fn">createTranslationRoute</span> } <span class="kw">from</span> <span class="str">'@universal-i18n/react/server'</span>;
 
@@ -823,14 +831,21 @@
           <div class="code-point">
             <span class="code-point-icon">✦</span>
             <span class="code-point-text"
-              ><strong>Step 1:</strong> Create the API route — keeps your
-              lingo.dev key safe on the server.</span
+              ><strong>Step 1:</strong> Get your Lingo.dev API key and save it
+              to `.env.local`.</span
             >
           </div>
           <div class="code-point">
             <span class="code-point-icon">✦</span>
             <span class="code-point-text"
-              ><strong>Step 2:</strong> Wrap your layout with
+              ><strong>Step 2:</strong> Create the API route — keeps your key
+              safe on the server.</span
+            >
+          </div>
+          <div class="code-point">
+            <span class="code-point-icon">✦</span>
+            <span class="code-point-text"
+              ><strong>Step 3:</strong> Wrap your layout with
               <code
                 style="
                   color: var(--purple-light);

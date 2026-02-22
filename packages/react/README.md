@@ -48,7 +48,15 @@ npm install @universal-i18n/react
 
 In Next.js, you can use the built-in server proxy to hide your API key completely.
 
-**Step A: Create the API Route** (`app/api/universal-i18n/route.ts`)
+**Step A: Get your API Key** (`.env.local`)
+
+Get your API key from [lingo.dev](https://lingo.dev) and add it to your environment variables:
+
+```env
+LINGODOTDEV_API_KEY="your_api_key_here"
+```
+
+**Step B: Create the API Route** (`app/api/universal-i18n/route.ts`)
 
 ```tsx
 import { createTranslationRoute } from "@universal-i18n/react/server";
@@ -57,7 +65,7 @@ import { createTranslationRoute } from "@universal-i18n/react/server";
 export const POST = createTranslationRoute();
 ```
 
-**Step B: Wrap your layout** (`app/layout.tsx` or `components/I18nWrapper.tsx`)
+**Step C: Wrap your layout** (`app/layout.tsx` or `components/I18nWrapper.tsx`)
 
 ```tsx
 "use client";

@@ -396,7 +396,7 @@ export function AutoTranslateProvider({
   apiKey,
   sourceLocale = "en",
   targetLocale: initialTargetLocale,
-  availableLocales = ["en"],
+  availableLocales = "all",
   batchDelayMs = 150,
   skipSelectors = DEFAULT_SKIP_SELECTORS,
   showSwitcher = true,
