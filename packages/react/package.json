@@ -24,7 +24,7 @@
         "type": "git",
         "url": "https://github.com/rohit27-02/universal-i18n"
     },
-    "homepage": "https://github.com/rohit27-02/universal-i18n#readme",
+    "homepage": "https://rohit27-02.github.io/universal-i18n",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
