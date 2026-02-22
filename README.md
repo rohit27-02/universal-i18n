@@ -1,6 +1,9 @@
 <div align="center">
   <h1>🌐 @universal-i18n/react</h1>
   <p><strong>The ultimate zero-config, zero-dependency auto-translation engine for React, Vite, and Next.js.</strong></p>
+  <a href="https://buymeacoffee.com/rohit27.02" target="_blank">
+    <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-rohit27.02-yellow?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white" alt="Buy Me A Coffee" />
+  </a>
 </div>
 
 ---
