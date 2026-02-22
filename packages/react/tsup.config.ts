@@ -5,7 +5,6 @@ export default defineConfig({
         index: 'src/index.ts',
         client: 'src/client.tsx',
         server: 'src/server.ts',
-        'react-server-stub': 'src/react-server-stub.ts',
     },
     format: ['cjs', 'esm'],
     dts: true,
