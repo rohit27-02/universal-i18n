@@ -4,6 +4,19 @@
   <a href="https://buymeacoffee.com/rohit27.02" target="_blank">
     <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-rohit27.02-yellow?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white" alt="Buy Me A Coffee" />
   </a>
+  <br/><br/>
+  <a href="https://www.npmjs.com/package/@universal-i18n/react">
+    <img src="https://img.shields.io/npm/v/@universal-i18n/react?style=for-the-badge&logo=npm&color=CB3837" alt="npm version" />
+  </a>
+  <a href="https://www.npmjs.com/package/@universal-i18n/react">
+    <img src="https://img.shields.io/npm/dm/@universal-i18n/react?style=for-the-badge&logo=npm&color=CB3837" alt="npm downloads" />
+  </a>
+  <a href="https://github.com/rohit27-02/universal-i18n/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
+  </a>
+  <a href="https://github.com/rohit27-02/universal-i18n">
+    <img src="https://img.shields.io/badge/GitHub-rohit27--02-black?style=for-the-badge&logo=github" alt="GitHub" />
+  </a>
 </div>
 
 ---
