@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Production-grade npm package for full web app translation & caching via Lingo.dev",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "test": "vitest run",
@@ -21,7 +24,7 @@
     "nextjs",
     "vite"
   ],
-  "author": "",
+  "author": "Rohit Rawat",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^25.3.0",

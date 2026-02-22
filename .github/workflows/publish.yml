@@ -22,9 +22,8 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Install dependencies
+      - name: Install dependencies (workspace root)
         run: npm install
-        working-directory: packages/react
 
       - name: Build package
         run: npm run build
