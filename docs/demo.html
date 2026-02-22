@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@universal-i18n/react — Live Demo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #060610;
+        --bg2: #0d0d1f;
+        --card: rgba(255, 255, 255, 0.04);
+        --border: rgba(255, 255, 255, 0.08);
+        --purple: #7c3aed;
+        --purple-light: #a78bfa;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --green: #10b981;
+        --red: #ef4444;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* ── Header ── */
+      header {
+        width: 100%;
+        padding: 20px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+        background: rgba(6, 6, 16, 0.9);
+        backdrop-filter: blur(20px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .logo {
+        font-size: 15px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #a78bfa, #60a5fa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .header-badge {
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: var(--green);
+        padding: 4px 14px;
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      /* ── Hero Title ── */
+      .demo-title {
+        text-align: center;
+        padding: 56px 24px 40px;
+      }
+      .demo-title h1 {
+        font-size: clamp(32px, 5vw, 60px);
+        font-weight: 900;
+        letter-spacing: -2px;
+        line-height: 1.1;
+        margin-bottom: 16px;
+      }
+      .grad {
+        background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .demo-title p {
+        color: var(--muted);
+        font-size: 18px;
+        margin-bottom: 32px;
+      }
+
+      /* ── Steps ── */
+      .steps {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 48px;
+      }
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .step.active {
+        border-color: var(--purple);
+        background: rgba(124, 58, 237, 0.15);
+        color: var(--purple-light);
+      }
+      .step-num {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--purple);
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .step.active .step-num {
+        background: var(--purple-light);
+      }
+
+      /* ── Main Demo Area ── */
+      .demo-area {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+      @media (max-width: 900px) {
+        .demo-area {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Left: Code Panel */
+      .code-panel {
+        background: #0a0a1a;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .panel-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+      }
+      .dot-r {
+        background: #ef4444;
+      }
+      .dot-y {
+        background: #f59e0b;
+      }
+      .dot-g {
+        background: #10b981;
+      }
+      .panel-title {
+        color: var(--muted);
+        font-size: 12px;
+        margin-left: 8px;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .code-content {
+        padding: 24px;
+        overflow: hidden;
+      }
+      pre {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+      }
+      .kw {
+        color: #c084fc;
+      }
+      .fn {
+        color: #60a5fa;
+      }
+      .str {
+        color: #34d399;
+      }
+      .cm {
+        color: #475569;
+      }
+      .tag {
+        color: #f472b6;
+      }
+      .attr {
+        color: #fb923c;
+      }
+      .val {
+        color: #34d399;
+      }
+      .dim {
+        color: #475569;
+      }
+
+      /* Code step panels */
+      .code-step {
+        display: none;
+      }
+      .code-step.visible {
+        display: block;
+      }
+
+      /* Right: Live Preview */
+      .preview-panel {
+        background: #f8fafc;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+      }
+      .preview-bar {
+        background: #e2e8f0;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .preview-dots {
+        display: flex;
+        gap: 6px;
+      }
+      .preview-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .preview-dot:nth-child(1) {
+        background: #ef4444;
+      }
+      .preview-dot:nth-child(2) {
+        background: #f59e0b;
+      }
+      .preview-dot:nth-child(3) {
+        background: #10b981;
+      }
+      .preview-url {
+        flex: 1;
+        background: white;
+        border-radius: 6px;
+        padding: 4px 12px;
+        font-size: 12px;
+        color: #64748b;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* The mock app inside the preview */
+      .mock-app {
+        background: white;
+        padding: 0;
+        font-family: "Inter", sans-serif;
+        min-height: 380px;
+        position: relative;
+      }
+      .mock-nav {
+        background: #1e1b4b;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .mock-logo {
+        color: white;
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .mock-nav-links {
+        display: flex;
+        gap: 20px;
+      }
+      .mock-nav-links span {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 13px;
+      }
+      .mock-hero {
+        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+        padding: 40px 24px;
+        text-align: center;
+        color: white;
+      }
+      .mock-hero h2 {
+        font-size: 26px;
+        font-weight: 800;
+        margin-bottom: 10px;
+      }
+      .mock-hero p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+      .mock-btn {
+        background: #7c3aed;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .mock-body {
+        padding: 24px;
+        background: #f8fafc;
+      }
+      .mock-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .mock-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      .mock-card-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1e1b4b;
+        margin-bottom: 6px;
+      }
+      .mock-card-text {
+        font-size: 12px;
+        color: #64748b;
+        line-height: 1.5;
+      }
+
+      /* Floating switcher simulation */
+      .mock-switcher {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #7c3aed;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        z-index: 10;
+      }
+      .mock-switcher:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 30px rgba(124, 58, 237, 0.5);
+      }
+
+      .mock-lang-menu {
+        position: absolute;
+        bottom: 64px;
+        right: 16px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        display: none;
+        z-index: 20;
+        min-width: 160px;
+      }
+      .mock-lang-menu.open {
+        display: block;
+      }
+      .mock-lang-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        padding: 8px 12px;
+        border: none;
+        background: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-family: "Inter", sans-serif;
+        transition: background 0.15s;
+        text-align: left;
+      }
+      .mock-lang-btn:hover {
+        background: #f1f5f9;
+      }
+      .mock-lang-btn.active {
+        background: #ede9fe;
+        color: #7c3aed;
+        font-weight: 600;
+      }
+
+      /* Translating overlay */
+      .translating-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(124, 58, 237, 0.9);
+        color: white;
+        padding: 8px 16px;
+        font-size: 12px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 50;
+        display: none;
+      }
+      .translating-bar.show {
+        display: flex;
+      }
+      .spinner {
+        width: 12px;
+        height: 12px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ── Pitch narration box ── */
+      .narration-box {
+        max-width: 1200px;
+        width: 100%;
+        padding: 0 24px;
+        margin-bottom: 40px;
+      }
+      .narration {
+        background: rgba(124, 58, 237, 0.1);
+        border: 1px solid rgba(124, 58, 237, 0.25);
+        border-left: 3px solid var(--purple-light);
+        border-radius: 12px;
+        padding: 20px 24px;
+      }
+      .narration-label {
+        color: var(--purple-light);
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+      }
+      .narration-text {
+        color: #cbd5e1;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+      .narration-text strong {
+        color: white;
+      }
+
+      /* ── CTA ── */
+      .demo-footer {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 24px 60px;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .cta-btn {
+        padding: 14px 32px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+        transition: transform 0.2s;
+      }
+      .cta-btn:hover {
+        transform: translateY(-2px);
+      }
+      .cta-npm {
+        background: #cb3837;
+        color: white;
+      }
+      .cta-gh {
+        background: #21262d;
+        color: white;
+        border: 1px solid #30363d;
+      }
+      .cta-coffee {
+        background: #ffdd00;
+        color: #1a1a1a;
+      }
+
+      /* ── Highlight animation ── */
+      .highlight-new {
+        animation: highlightFade 1.5s ease forwards;
+      }
+      @keyframes highlightFade {
+        0% {
+          background: rgba(124, 58, 237, 0.3);
+        }
+        100% {
+          background: transparent;
+        }
+      }
+
+      /* translations */
+      .t {
+        transition: opacity 0.3s;
+      }
+      .t.fading {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">🌐 @universal-i18n/react</div>
+      <div class="header-badge">● Live Demo</div>
+    </header>
+
+    <div class="demo-title">
+      <h1>One component.<br /><span class="grad">Infinite languages.</span></h1>
+      <p>
+        Watch how <strong>@universal-i18n/react</strong> translates an entire
+        React app in real-time — no JSON files, no
+        <code
+          style="
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
+          "
+          >t()</code
+        >
+        wrappers.
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="steps">
+      <div class="step active" onclick="showStep(1)">
+        <div class="step-num">1</div>
+        The Problem
+      </div>
+      <div class="step" onclick="showStep(2)">
+        <div class="step-num">2</div>
+        Add the Package
+      </div>
+      <div class="step" onclick="showStep(3)">
+        <div class="step-num">3</div>
+        Wrap → Done
+      </div>
+      <div class="step" onclick="showStep(4)">
+        <div class="step-num">4</div>
+        Live Translation ✨
+      </div>
+    </div>
+
+    <!-- Demo Area -->
+    <div class="demo-area">
+      <!-- Left: Code -->
+      <div class="code-panel">
+        <div class="panel-header">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+          <span class="panel-title" id="panel-filename">Before.tsx</span>
+        </div>
+        <div class="code-content">
+          <!-- Step 1: The Problem -->
+          <div class="code-step visible" id="code-step-1">
+            <pre><span class="cm">// Traditional i18n: a nightmare.</span>
+<span class="cm">// You need to:</span>
+<span class="cm">//  ❌ Create en.json, es.json, fr.json...</span>
+<span class="cm">//  ❌ Wrap EVERY string in t()</span>
+<span class="cm">//  ❌ Configure next-i18next / react-i18next</span>
+<span class="cm">//  ❌ Maintain translations forever</span>
+
+<span class="kw">import</span> { <span class="fn">useTranslation</span> } <span class="kw">from</span> <span class="str">'react-i18next'</span>;
+
+<span class="kw">function</span> <span class="fn">HomePage</span>() {
+  <span class="kw">const</span> { t } = <span class="fn">useTranslation</span>();
+  <span class="kw">return</span> (
+    &lt;<span class="tag">div</span>&gt;
+      &lt;<span class="tag">h1</span>&gt;{<span class="fn">t</span>(<span class="str">'hero.title'</span>)}&lt;/<span class="tag">h1</span>&gt;
+      &lt;<span class="tag">p</span>&gt;{<span class="fn">t</span>(<span class="str">'hero.subtitle'</span>)}&lt;/<span class="tag">p</span>&gt;
+      &lt;<span class="tag">button</span>&gt;{<span class="fn">t</span>(<span class="str">'hero.cta'</span>)}&lt;/<span class="tag">button</span>&gt;
+      <span class="cm">// ... every. single. string.</span>
+    &lt;/<span class="tag">div</span>&gt;
+  );
+}</pre>
+          </div>
+
+          <!-- Step 2: Install -->
+          <div class="code-step" id="code-step-2">
+            <pre><span class="cm"># One command. No setup needed.</span>
+
+<span class="fn">npm install</span> <span class="str">@universal-i18n/react</span>
+
+
+<span class="cm">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="cm">  Bundle size:        &lt; 10KB  ✓</span>
+<span class="cm">  Dependencies:       0       ✓</span>
+<span class="cm">  Config files:       0       ✓</span>
+<span class="cm">  JSON files needed:  0       ✓</span>
+<span class="cm">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+
+<span class="cm"># For Next.js — API key stays server-side:</span>
+<span class="cm"># Set NEXT_PUBLIC_LINGODOTDEV_API_KEY in .env</span>
+
+<span class="cm"># For Vite:</span>
+<span class="cm"># Set VITE_LINGO_API_KEY in .env</span></pre>
+          </div>
+
+          <!-- Step 3: Wrap -->
+          <div class="code-step" id="code-step-3">
+            <pre><span class="cm">// Step 1: One API route (Next.js)</span>
+<span class="cm">// app/api/universal-i18n/route.ts</span>
+<span class="kw">import</span> { <span class="fn">createTranslationRoute</span> }
+  <span class="kw">from</span> <span class="str">'@universal-i18n/react/server'</span>;
+
+<span class="kw">export const</span> <span class="fn">POST</span> = <span class="fn">createTranslationRoute</span>();
+
+
+<span class="cm">// Step 2: Wrap your layout. That's it.</span>
+<span class="cm">// components/I18nWrapper.tsx</span>
+<span class="kw">import</span> { <span class="fn">AutoTranslateProvider</span>, <span class="fn">ALL_LOCALES</span> }
+  <span class="kw">from</span> <span class="str">'@universal-i18n/react'</span>;
+
+<span class="kw">export function</span> <span class="fn">I18nWrapper</span>({ children }) {
+  <span class="kw">return</span> (
+    &lt;<span class="tag">AutoTranslateProvider</span>
+      <span class="attr">sourceLocale</span>=<span class="val">"en"</span>
+      <span class="attr">availableLocales</span>={<span class="fn">ALL_LOCALES</span>}
+    &gt;
+      {children}  <span class="cm">← Everything translates</span>
+    &lt;/<span class="tag">AutoTranslateProvider</span>&gt;
+  );
+}</pre>
+          </div>
+
+          <!-- Step 4: Result -->
+          <div class="code-step" id="code-step-4">
+            <pre><span class="cm">// Your original code. UNCHANGED.</span>
+<span class="cm">// No t(), no translations, nothing.</span>
+
+<span class="kw">function</span> <span class="fn">HomePage</span>() {
+  <span class="kw">return</span> (
+    &lt;<span class="tag">div</span>&gt;
+      &lt;<span class="tag">h2</span>&gt;Welcome to our platform&lt;/<span class="tag">h2</span>&gt;
+      &lt;<span class="tag">p</span>&gt;The best tool for your team.&lt;/<span class="tag">p</span>&gt;
+      &lt;<span class="tag">button</span>&gt;Get Started&lt;/<span class="tag">button</span>&gt;
+    &lt;/<span class="tag">div</span>&gt;
+  );
+}
+
+<span class="cm">// 🌍 Click the 🌐 button in the preview →</span>
+<span class="cm">// Watch it switch to Spanish, Hindi,</span>
+<span class="cm">// Japanese... instantly. Zero changes</span>
+<span class="cm">// to your component code.</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Preview -->
+      <div class="preview-panel">
+        <div class="preview-bar">
+          <div class="preview-dots">
+            <div class="preview-dot"></div>
+            <div class="preview-dot"></div>
+            <div class="preview-dot"></div>
+          </div>
+          <div class="preview-url">localhost:3000</div>
+        </div>
+        <div class="mock-app" id="mock-app">
+          <div class="translating-bar" id="translating-bar">
+            <div class="spinner"></div>
+            <span id="translating-text">Translating to Spanish...</span>
+          </div>
+
+          <div class="mock-nav">
+            <div class="mock-logo">
+              ✦ <span class="t" id="t-brand">MyApp</span>
+            </div>
+            <div class="mock-nav-links">
+              <span class="t" id="t-nav1">Features</span>
+              <span class="t" id="t-nav2">Pricing</span>
+              <span class="t" id="t-nav3">About</span>
+            </div>
+          </div>
+
+          <div class="mock-hero">
+            <h2 class="t" id="t-h1">Welcome to our platform</h2>
+            <p class="t" id="t-p1">
+              The best tool for your team. Boost productivity today.
+            </p>
+            <button class="mock-btn t" id="t-cta">Get Started →</button>
+          </div>
+
+          <div class="mock-body">
+            <div class="mock-cards">
+              <div class="mock-card">
+                <div class="mock-card-title t" id="t-c1t">Fast & Reliable</div>
+                <div class="mock-card-text t" id="t-c1d">
+                  Built for performance at any scale.
+                </div>
+              </div>
+              <div class="mock-card">
+                <div class="mock-card-title t" id="t-c2t">
+                  Secure by Default
+                </div>
+                <div class="mock-card-text t" id="t-c2d">
+                  Enterprise-grade security included.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating switcher -->
+          <div
+            class="mock-switcher"
+            onclick="toggleMenu()"
+            id="switcher-btn"
+            title="Switch language"
+          >
+            🌐
+          </div>
+
+          <div class="mock-lang-menu" id="lang-menu">
+            <button
+              class="mock-lang-btn active"
+              onclick="switchLang('en', this)"
+            >
+              🇺🇸 English
+            </button>
+            <button class="mock-lang-btn" onclick="switchLang('es', this)">
+              🇪🇸 Español
+            </button>
+            <button class="mock-lang-btn" onclick="switchLang('fr', this)">
+              🇫🇷 Français
+            </button>
+            <button class="mock-lang-btn" onclick="switchLang('hi', this)">
+              🇮🇳 हिन्दी
+            </button>
+            <button class="mock-lang-btn" onclick="switchLang('ja', this)">
+              🇯🇵 日本語
+            </button>
+            <button class="mock-lang-btn" onclick="switchLang('ar', this)">
+              🇸🇦 العربية
+            </button>
+            <button class="mock-lang-btn" onclick="switchLang('de', this)">
+              🇩🇪 Deutsch
+            </button>
+            <button class="mock-lang-btn" onclick="switchLang('zh', this)">
+              🇨🇳 中文
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Narration -->
+    <div class="narration-box">
+      <div class="narration" id="narration">
+        <div class="narration-label">🎙 Pitch Script — Step 1</div>
+        <p class="narration-text" id="narration-text">
+          <strong>"Traditional i18n is painful."</strong> You need to create
+          JSON files for every language, wrap every single string in
+          <code>t()</code>, configure next-i18next, and maintain all of it
+          forever. What if you could skip all of that?
+        </p>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="demo-footer">
+      <a
+        href="https://www.npmjs.com/package/@universal-i18n/react"
+        target="_blank"
+        class="cta-btn cta-npm"
+        >📦 Install from NPM</a
+      >
+      <a
+        href="https://github.com/rohit27-02/universal-i18n"
+        target="_blank"
+        class="cta-btn cta-gh"
+        >⭐ Star on GitHub</a
+      >
+      <a
+        href="https://buymeacoffee.com/rohit27.02"
+        target="_blank"
+        class="cta-btn cta-coffee"
+        >☕ Buy Me a Coffee</a
+      >
+    </div>
+
+    <script>
+      const translations = {
+        en: {
+          brand: "MyApp",
+          nav1: "Features",
+          nav2: "Pricing",
+          nav3: "About",
+          h1: "Welcome to our platform",
+          p1: "The best tool for your team. Boost productivity today.",
+          cta: "Get Started →",
+          c1t: "Fast & Reliable",
+          c1d: "Built for performance at any scale.",
+          c2t: "Secure by Default",
+          c2d: "Enterprise-grade security included.",
+          lang: "English",
+        },
+        es: {
+          brand: "MiApp",
+          nav1: "Funciones",
+          nav2: "Precios",
+          nav3: "Acerca de",
+          h1: "Bienvenido a nuestra plataforma",
+          p1: "La mejor herramienta para tu equipo. Aumenta la productividad hoy.",
+          cta: "Comenzar →",
+          c1t: "Rápido y Confiable",
+          c1d: "Construido para el rendimiento a cualquier escala.",
+          c2t: "Seguro por Defecto",
+          c2d: "Seguridad de nivel empresarial incluida.",
+          lang: "Spanish",
+        },
+        fr: {
+          brand: "MonApp",
+          nav1: "Fonctions",
+          nav2: "Tarifs",
+          nav3: "À propos",
+          h1: "Bienvenue sur notre plateforme",
+          p1: "Le meilleur outil pour votre équipe. Boostez votre productivité.",
+          cta: "Commencer →",
+          c1t: "Rapide et Fiable",
+          c1d: "Conçu pour des performances à grande échelle.",
+          c2t: "Sécurisé par Défaut",
+          c2d: "Sécurité de niveau entreprise incluse.",
+          lang: "French",
+        },
+        hi: {
+          brand: "मेरा ऐप",
+          nav1: "सुविधाएँ",
+          nav2: "मूल्य",
+          nav3: "हमारे बारे में",
+          h1: "हमारे प्लेटफ़ॉर्म पर आपका स्वागत है",
+          p1: "आपकी टीम के लिए सबसे अच्छा उपकरण। आज उत्पादकता बढ़ाएं।",
+          cta: "शुरू करें →",
+          c1t: "तेज़ और विश्वसनीय",
+          c1d: "किसी भी पैमाने पर प्रदर्शन के लिए बनाया गया।",
+          c2t: "डिफ़ॉल्ट रूप से सुरक्षित",
+          c2d: "एंटरप्राइज़-ग्रेड सुरक्षा शामिल।",
+          lang: "Hindi",
+        },
+        ja: {
+          brand: "マイApp",
+          nav1: "機能",
+          nav2: "料金",
+          nav3: "概要",
+          h1: "私たちのプラットフォームへようこそ",
+          p1: "チームに最適なツール。今日から生産性を高めましょう。",
+          cta: "始める →",
+          c1t: "高速で信頼性が高い",
+          c1d: "あらゆる規模のパフォーマンスのために構築。",
+          c2t: "デフォルトでセキュア",
+          c2d: "エンタープライズグレードのセキュリティが含まれています。",
+          lang: "Japanese",
+        },
+        ar: {
+          brand: "تطبيقي",
+          nav1: "الميزات",
+          nav2: "الأسعار",
+          nav3: "من نحن",
+          h1: "مرحباً بك في منصتنا",
+          p1: "أفضل أداة لفريقك. عزز الإنتاجية اليوم.",
+          cta: "← ابدأ الآن",
+          c1t: "سريع وموثوق",
+          c1d: "مصمم للأداء على أي نطاق.",
+          c2t: "آمن بشكل افتراضي",
+          c2d: "أمان على مستوى المؤسسة متضمن.",
+          lang: "Arabic",
+        },
+        de: {
+          brand: "MeineApp",
+          nav1: "Funktionen",
+          nav2: "Preise",
+          nav3: "Über uns",
+          h1: "Willkommen auf unserer Plattform",
+          p1: "Das beste Werkzeug für Ihr Team. Steigern Sie die Produktivität heute.",
+          cta: "Loslegen →",
+          c1t: "Schnell & Zuverlässig",
+          c1d: "Für Leistung in jedem Maßstab gebaut.",
+          c2t: "Standardmäßig sicher",
+          c2d: "Sicherheit auf Unternehmensebene inklusive.",
+          lang: "German",
+        },
+        zh: {
+          brand: "我的应用",
+          nav1: "功能",
+          nav2: "价格",
+          nav3: "关于",
+          h1: "欢迎来到我们的平台",
+          p1: "您团队的最佳工具。今天提高生产力。",
+          cta: "开始 →",
+          c1t: "快速可靠",
+          c1d: "专为任何规模的高性能而构建。",
+          c2t: "默认安全",
+          c2d: "包含企业级安全性。",
+          lang: "Chinese",
+        },
+      };
+
+      const narrations = {
+        1: {
+          label: "🎙 Pitch Script — Step 1: The Problem",
+          text: `<strong>"Traditional i18n is painful."</strong> You need JSON files for every language, wrap every single string in <code>t()</code>, configure next-i18next, and maintain all of it forever. What if you could skip all of that?`,
+        },
+        2: {
+          label: "🎙 Pitch Script — Step 2: One npm Install",
+          text: `<strong>"One command. Zero configuration."</strong> Under 10KB. Zero dependencies. No JSON translation files. No i18n config. Just install it and you're ready.`,
+        },
+        3: {
+          label: "🎙 Pitch Script — Step 3: Wrap Your App",
+          text: `<strong>"Two lines of setup."</strong> Create one API route to keep your API key secure on the server. Then wrap your layout with <code>&lt;AutoTranslateProvider&gt;</code>. That's it. Your entire app is now multilingual.`,
+        },
+        4: {
+          label: "🎙 Pitch Script — Step 4: See it Live ✨",
+          text: `<strong>"Go ahead — click the 🌐 button."</strong> Watch the entire app switch language in real-time. No page reload. No code changes. Your components are completely untouched. <strong>This is what zero-config actually means.</strong>`,
+        },
+      };
+
+      let currentStep = 1;
+
+      function showStep(n) {
+        currentStep = n;
+        document
+          .querySelectorAll(".code-step")
+          .forEach((el) => el.classList.remove("visible"));
+        document
+          .querySelectorAll(".step")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById(`code-step-${n}`).classList.add("visible");
+        document.querySelectorAll(".step")[n - 1].classList.add("active");
+
+        const filenames = [
+          "Before.tsx",
+          "terminal",
+          "I18nWrapper.tsx",
+          "HomePage.tsx (unchanged)",
+        ];
+        document.getElementById("panel-filename").textContent =
+          filenames[n - 1];
+
+        const narr = narrations[n];
+        document.querySelector(".narration-label").textContent = narr.label;
+        document.getElementById("narration-text").innerHTML = narr.text;
+      }
+
+      function toggleMenu() {
+        const menu = document.getElementById("lang-menu");
+        menu.classList.toggle("open");
+      }
+
+      document.addEventListener("click", (e) => {
+        const menu = document.getElementById("lang-menu");
+        const btn = document.getElementById("switcher-btn");
+        if (!menu.contains(e.target) && !btn.contains(e.target)) {
+          menu.classList.remove("open");
+        }
+      });
+
+      function switchLang(code, btnEl) {
+        document.getElementById("lang-menu").classList.remove("open");
+        document
+          .querySelectorAll(".mock-lang-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btnEl.classList.add("active");
+
+        const t = translations[code];
+        const bar = document.getElementById("translating-bar");
+        document.getElementById("translating-text").textContent =
+          `Translating to ${t.lang}...`;
+
+        bar.classList.add("show");
+
+        const els = document.querySelectorAll(".t");
+        els.forEach((el) => el.classList.add("fading"));
+
+        setTimeout(() => {
+          const map = {
+            "t-brand": "brand",
+            "t-nav1": "nav1",
+            "t-nav2": "nav2",
+            "t-nav3": "nav3",
+            "t-h1": "h1",
+            "t-p1": "p1",
+            "t-cta": "cta",
+            "t-c1t": "c1t",
+            "t-c1d": "c1d",
+            "t-c2t": "c2t",
+            "t-c2d": "c2d",
+          };
+          Object.entries(map).forEach(([id, key]) => {
+            document.getElementById(id).textContent = t[key];
+          });
+          els.forEach((el) => el.classList.remove("fading"));
+          bar.classList.remove("show");
+        }, 600);
+      }
+    </script>
+  </body>
+</html>
