@@ -22,9 +22,9 @@
     "author": "Rohit Rawat",
     "repository": {
         "type": "git",
-        "url": "https://github.com/lingo-i18n/universal-i18n"
+        "url": "https://github.com/rohit27-02/universal-i18n"
     },
-    "homepage": "https://github.com/lingo-i18n/universal-i18n#readme",
+    "homepage": "https://github.com/rohit27-02/universal-i18n#readme",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
