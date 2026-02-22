@@ -1,6 +1,6 @@
 {
     "name": "@universal-i18n/react",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "description": "Zero-config auto-translation for React, Next.js, and Vite",
     "keywords": [
         "i18n",
@@ -30,6 +30,7 @@
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
+            "react-server": "./dist/react-server-stub.mjs",
             "types": "./dist/index.d.ts",
             "import": "./dist/index.mjs",
             "require": "./dist/index.js"
