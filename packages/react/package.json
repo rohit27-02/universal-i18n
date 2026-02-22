@@ -1,6 +1,6 @@
 {
     "name": "@universal-i18n/react",
-    "version": "3.0.3",
+    "version": "3.0.4",
     "description": "Zero-config auto-translation for React, Next.js, and Vite",
     "keywords": [
         "i18n",

@@ -617,6 +617,13 @@ export function AutoTranslateProvider({
 function FloatingLanguageSwitcher() {
   const { locale, setLocale, availableLocales } = useAutoTranslate();
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <div
