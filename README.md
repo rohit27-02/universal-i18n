@@ -17,7 +17,25 @@
   <a href="https://github.com/rohit27-02/universal-i18n">
     <img src="https://img.shields.io/badge/GitHub-rohit27--02-black?style=for-the-badge&logo=github" alt="GitHub" />
   </a>
+  <br/><br/>
+  <a href="https://www.youtube.com/watch?v=u6PHWktyr4g">
+    <img src="https://img.shields.io/badge/Watch%20on-YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Tutorial" />
+  </a>
+  <a href="https://dev.to/rohit27-02/add-100-languages-to-react-in-2-minutes-zero-config-zero-json-files-2b9i">
+    <img src="https://img.shields.io/badge/Read%20on-dev.to-0A0A0A?style=for-the-badge&logo=devdotto&logoColor=white" alt="dev.to Blog Post" />
+  </a>
 </div>
+
+---
+
+## 📚 Resources
+
+| Resource | Link |
+|---|---|
+| 🎥 Video Tutorial | [Watch on YouTube](https://www.youtube.com/watch?v=u6PHWktyr4g) |
+| 📝 Blog Post | [Read on dev.to](https://dev.to/rohit27-02/add-100-languages-to-react-in-2-minutes-zero-config-zero-json-files-2b9i) |
+| 📦 NPM Package | [@universal-i18n/react](https://www.npmjs.com/package/@universal-i18n/react) |
+| 🌐 Live Demo | [rohit27-02.github.io/universal-i18n](https://rohit27-02.github.io/universal-i18n/demo.html) |
 
 ---
 
